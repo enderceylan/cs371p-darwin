@@ -92,7 +92,7 @@ int main () {
     cout << "*** Darwin 7x9 ***" << endl;
     srand(0);
     /*
-    7x9 Darwin
+    7x9 Darwin 
     Trap,   facing south, at (0, 0)
     Hopper, facing east,  at (3, 2)
     Rover,  facing north, at (5, 4)
