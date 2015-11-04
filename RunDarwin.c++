@@ -13,6 +13,8 @@
 #include <iostream>  // cout, endl
 #include <stdexcept> // invalid_argument, out_of_range
 
+#include "Darwin.h"
+
 // ----
 // main
 // ----
@@ -29,6 +31,10 @@ int main () {
      1: go 0
     */
 
+    Species food('f');
+    food.addInstruction("left");
+    food.addInstruction("go 0");
+
     // ------
     // hopper
     // ------
@@ -37,6 +43,10 @@ int main () {
      0: hop
      1: go 0
     */
+
+    Species hopper('h');
+    hopper.addInstruction("hop");
+    hopper.addInstruction("go 0");
 
     // -----
     // rover
@@ -56,6 +66,19 @@ int main () {
     10: go 0
     */
 
+    Species rover('r');
+    rover.addInstruction("if_enemy 9");
+    rover.addInstruction("if_empty 7");
+    rover.addInstruction("if_random 5");
+    rover.addInstruction("left");
+    rover.addInstruction("go 0");
+    rover.addInstruction("right");
+    rover.addInstruction("go 0");
+    rover.addInstruction("hop");
+    rover.addInstruction("go 0");
+    rover.addInstruction("infect");
+    rover.addInstruction("go 0");
+
     // ----
     // trap
     // ----
@@ -67,6 +90,13 @@ int main () {
      3: infect
      4: go 0
     */
+
+    Species trap('t');
+    trap.addInstruction("if_enemy 3");
+    trap.addInstruction("left");
+    trap.addInstruction("go 0");
+    trap.addInstruction("infect");
+    trap.addInstruction("go 0");
 
     // ----------
     // darwin 8x8
@@ -85,6 +115,28 @@ int main () {
     Print every grid.
     */
 
+    //0:west, 1:north, 2:east, 3:south.
+
+    Darwin map1(8,8);
+    Creature a1(food, 2);
+    map1.addCreature(a1, 0, 0);
+    Creature a2(hopper, 1);
+    map1.addCreature(a2, 3, 3);
+    Creature a3(hopper, 2);
+    map1.addCreature(a3, 3, 4);
+    Creature a4(hopper, 3);
+    map1.addCreature(a4, 4, 4);
+    Creature a5(hopper, 0);
+    map1.addCreature(a5, 4, 3);
+    Creature a6(food, 1);
+    map1.addCreature(a6, 7, 7);
+
+    for (int i = 0; i < 5; i++)
+    {
+        map1.executeTurn();
+        map1.printBoard();
+    }
+
     // ----------
     // darwin 7x9
     // ----------
@@ -100,6 +152,22 @@ int main () {
     Simulate 5 moves.
     Print every grid.
     */
+
+    Darwin map2(7,9);
+    Creature b1(trap, 3);
+    map2.addCreature(b1, 0, 0);
+    Creature b2(hopper, 2);
+    map2.addCreature(b2, 3, 2);
+    Creature b3(rover, 1);
+    map2.addCreature(b3, 5, 4);
+    Creature b4(trap, 0);
+    map2.addCreature(b4, 6, 8);
+
+    for (int i = 0; i < 5; i++)
+    {
+        map2.executeTurn();
+        map2.printBoard();
+    }
 
     // ------------
     // darwin 72x72
