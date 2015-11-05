@@ -19,6 +19,7 @@ class Species
     public:
         Species();
         Species(char c);
+        Species(const Species& s);
         void addInstruction(string inst);
         string& operator[] (int x);
         friend std::ostream& operator<<(std::ostream& out, const Species& s)
@@ -35,8 +36,13 @@ class Creature
     public:
         Creature();
         Creature(Species s, int dir);
+        Creature(const Creature& c);
         bool isValid(int turn);
         void executeInstruction(Darwin* d, int x, int y);
+        bool acted_upon(int turn);
+        void goAgain();
+        void print_prg_ct();
+        void modify_creature(const Creature& c);
         friend std::ostream& operator<<(std::ostream& out, const Creature& c)
         {
             return out << c.species;
@@ -56,11 +62,12 @@ class Darwin
         void addCreature(Creature c, int x, int y);
         Creature begin(void);
         Creature end(void);
-        Creature at(int x, int y);
+        Creature& at(int x, int y);
         void executeTurn(void);
         void removeCreature(int x, int y);
         void printBoard(void);
         bool inBounds(int x, int y);
+        void repeat(int x, int y);
     private:
         std::vector<std::vector<Creature>> grid;
         int x_size;

@@ -98,6 +98,37 @@ int main () {
     trap.addInstruction("infect");
     trap.addInstruction("go 0");
 
+    // -----
+    // best
+    // -----
+
+    /*
+     0: if_enemy 9
+     1: if_empty 7
+     2: if_random 5
+     3: left
+     4: go 0
+     5: right
+     6: go 0
+     7: hop
+     8: go 0
+     9: infect
+    10: go 0
+    */
+
+    Species best('b');
+    best.addInstruction("if_enemy 9");
+    best.addInstruction("if_empty 7");
+    best.addInstruction("if_random 5");
+    best.addInstruction("left");
+    best.addInstruction("go 0");
+    best.addInstruction("right");
+    best.addInstruction("go 0");
+    best.addInstruction("hop");
+    best.addInstruction("go 0");
+    best.addInstruction("infect");
+    best.addInstruction("go 0");
+
     // ----------
     // darwin 8x8
     // ----------
@@ -131,7 +162,7 @@ int main () {
     Creature a6(food, 1);
     map1.addCreature(a6, 7, 7);
 
-    for (int i = 0; i < 5; i++)
+    for (int i = 0; i <= 5; i++)
     {
         map1.printBoard();
         map1.executeTurn();
@@ -163,10 +194,10 @@ int main () {
     Creature b4(trap, 0);
     map2.addCreature(b4, 6, 8);
 
-    for (int i = 0; i < 5; i++)
+    for (int i = 0; i <= 5; i++)
     {
-        map2.executeTurn();
         map2.printBoard();
+        map2.executeTurn();
     }
 
     // ------------
@@ -192,6 +223,40 @@ int main () {
     Print every 100th grid after that (i.e. 100, 200, 300...1000).
     */
 
+    Darwin map3(72,72);
+    for (int i = 0; i < 10; i++)
+    {
+        int position = rand()%5184;
+        int direction = rand()%4;
+        map3.addCreature(Creature(food, direction), position/72, (position/72)/72);
+    }
+    for (int i = 0; i < 10; i++)
+    {
+        int position = rand()%5184;
+        int direction = rand()%4;
+        map3.addCreature(Creature(hopper, direction), position/72, (position/72)/72);
+    }
+    for (int i = 0; i < 10; i++)
+    {
+        int position = rand()%5184;
+        int direction = rand()%4;
+        map3.addCreature(Creature(rover, direction), position/72, (position/72)/72);
+    }
+    for (int i = 0; i < 10; i++)
+    {
+        int position = rand()%5184;
+        int direction = rand()%4;
+        map3.addCreature(Creature(trap, direction), position/72, (position/72)/72);
+    }
+    for (int i = 0; i <= 1000; i++)
+    {
+        if (i < 10 || i % 100 == 0)
+        {
+            map3.printBoard();
+        }
+        map3.executeTurn();
+    }
+
     // ------------
     // darwin 72x72
     // with best
@@ -216,5 +281,45 @@ int main () {
     Print the first 10 grids          (i.e. 0, 1, 2...9).
     Print every 100th grid after that (i.e. 100, 200, 300...1000).
     */
+
+    Darwin map4(72,72);
+    for (int i = 0; i < 10; i++)
+    {
+        int position = rand()%5184;
+        int direction = rand()%4;
+        map4.addCreature(Creature(food, direction), position/72, (position/72)/72);
+    }
+    for (int i = 0; i < 10; i++)
+    {
+        int position = rand()%5184;
+        int direction = rand()%4;
+        map4.addCreature(Creature(hopper, direction), position/72, (position/72)/72);
+    }
+    for (int i = 0; i < 10; i++)
+    {
+        int position = rand()%5184;
+        int direction = rand()%4;
+        map4.addCreature(Creature(rover, direction), position/72, (position/72)/72);
+    }
+    for (int i = 0; i < 10; i++)
+    {
+        int position = rand()%5184;
+        int direction = rand()%4;
+        map4.addCreature(Creature(trap, direction), position/72, (position/72)/72);
+    }
+    for (int i = 0; i < 10; i++)
+    {
+        int position = rand()%5184;
+        int direction = rand()%4;
+        map4.addCreature(Creature(best, direction), position/72, (position/72)/72);
+    }
+    for (int i = 0; i <= 1000; i++)
+    {
+        if (i < 10 || i % 100 == 0)
+        {
+            map4.printBoard();
+        }
+        map4.executeTurn();
+    }
 
     return 0;}
