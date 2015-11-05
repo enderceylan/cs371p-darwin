@@ -133,8 +133,8 @@ int main () {
 
     for (int i = 0; i < 5; i++)
     {
-        map1.executeTurn();
         map1.printBoard();
+        map1.executeTurn();
     }
 
     // ----------

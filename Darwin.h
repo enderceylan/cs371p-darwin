@@ -27,7 +27,6 @@ class Species
         }
     private:
         std::vector<string> program;
-        int inst_count;
         char symbol;
 };
 
@@ -36,7 +35,7 @@ class Creature
     public:
         Creature();
         Creature(Species s, int dir);
-        bool isValid();
+        bool isValid(int turn);
         void executeInstruction(Darwin* d, int x, int y);
         friend std::ostream& operator<<(std::ostream& out, const Creature& c)
         {
@@ -47,6 +46,7 @@ class Creature
         Species species;
         int direction;
         int program_counter;
+        int turn_counter;
 };
 
 class Darwin 

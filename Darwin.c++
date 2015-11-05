@@ -27,10 +27,20 @@ Darwin::Darwin(int x, int y)
     x_size = x;
     y_size = y;
     turn = 0;
+    for (int i = 0; i < x_size; i++)
+    {
+        vector<Creature> temp;
+        for (int j = 0; j < y_size; j++)
+        {
+            temp.push_back(Creature());
+        }
+        grid.push_back(temp);
+    }
 }
 
 void Darwin::addCreature(Creature c, int x, int y)
 {
+    cout << c << endl;
     grid[x][y] = c;
 }
 
@@ -51,16 +61,18 @@ Creature Darwin::end()
 
 void Darwin::executeTurn(void)
 {
-    for (int i = 0; i < x_size; i++)
+    for (int j = 0; j < y_size; j++)
     {
-        for (int j = 0; j < y_size; j++)
+        for (int i = 0; i < x_size; i++)
         {
-            if (grid[i][j].isValid())
+            if (grid[i][j].isValid(turn))
             {
+                //cout << i << " and " << j << "are valid" << endl;
                 grid[i][j].executeInstruction(this, i, j);
             }
         }
     }
+    turn += 1;
 }
 
 Creature Darwin::at(int x, int y)
@@ -78,7 +90,7 @@ Creature Darwin::at(int x, int y)
 void Darwin::printBoard(void)
 {
     cout << "Turn = " << turn << "." << endl;
-    cout << "  ";
+    cout << " ";
     for (int i = 0; i < x_size; i++)
     {
         cout << (i % 10);
@@ -89,7 +101,7 @@ void Darwin::printBoard(void)
         cout << (j % 10);
         for (int k = 0; k < x_size; k++)
         {
-            if (!grid[k][j].isValid())
+            if (!grid[k][j].isValid(turn))
             {
                 cout << ".";
             }
@@ -119,8 +131,10 @@ bool Darwin::inBounds(int x, int y)
 
 Creature::Creature(void)
 {
+    species = Species();
     direction = -1;
     program_counter = -1;
+    turn_counter = -1;
 }
 
 Creature::Creature(Species s, int dir)
@@ -128,11 +142,12 @@ Creature::Creature(Species s, int dir)
     species = s;
     direction = dir;  //0:west, 1:north, 2:east, 3:south.
     program_counter = 0;
+    turn_counter = 0;
 }
 
-bool Creature::isValid(void)
+bool Creature::isValid(int turn)
 {
-    return direction || program_counter;
+    return (direction != -1) && (program_counter != -1) && (turn_counter <= turn);
 }
 
 std::pair<int, int> Creature::getNextLoc(int x, int y)
@@ -166,11 +181,14 @@ void Creature::executeInstruction(Darwin* d, int x, int y)
     string inst = species[program_counter];
     if (inst.find("hop") != string::npos) 
     {
+        cout << "Current x:" << x << " , Current y:" << y << endl;
+        cout << direction << endl;
         std::pair<int, int> newloc = getNextLoc(x,y);
         if (d->inBounds(newloc.first,newloc.second))
         {
-            d->removeCreature(x,y);
+            cout << newloc.first << " " << newloc.second << endl;
             d->addCreature(*this, newloc.first, newloc.second);
+            d->removeCreature(x,y);
         }
         program_counter += 1;
     } 
@@ -201,7 +219,7 @@ void Creature::executeInstruction(Darwin* d, int x, int y)
     else if (inst.find("infect") != string::npos) 
     {
         std::pair<int, int> newloc = getNextLoc(x,y);
-        if (d->inBounds(newloc.first,newloc.second) && d->at(newloc.first,newloc.second).isValid())
+        if (d->inBounds(newloc.first,newloc.second) && d->at(newloc.first,newloc.second).isValid(0))
         {
             d->removeCreature(newloc.first, newloc.second);
             d->addCreature(Creature(species,direction), newloc.first, newloc.second);
@@ -216,7 +234,7 @@ void Creature::executeInstruction(Darwin* d, int x, int y)
     {
         std::pair<int, int> newloc = getNextLoc(x,y);
         string num = inst.substr(9);
-        if (!d->at(newloc.first,newloc.second).isValid())
+        if (!d->at(newloc.first,newloc.second).isValid(0))
         {
             program_counter = (int)stoi(num);
         }
@@ -257,7 +275,7 @@ void Creature::executeInstruction(Darwin* d, int x, int y)
     {
         std::pair<int, int> newloc = getNextLoc(x,y);
         string num = inst.substr(9);
-        if (d->inBounds(newloc.first,newloc.second) && d->at(newloc.first,newloc.second).isValid())
+        if (d->inBounds(newloc.first,newloc.second) && d->at(newloc.first,newloc.second).isValid(0))
         {
             program_counter = (int)stoi(num);
         }
@@ -272,6 +290,7 @@ void Creature::executeInstruction(Darwin* d, int x, int y)
         string num = inst.substr(3);
         program_counter = (int)stoi(num);
     }
+    turn_counter += 1;
 }
 
 
@@ -281,19 +300,18 @@ void Creature::executeInstruction(Darwin* d, int x, int y)
 Species::Species(void)
 {
     symbol = '.';
-    inst_count = -1;
+    program = {};
 }
 
 Species::Species(char c)
 {
     symbol = c;
-    inst_count = 0;
+    program = {};
 }
 
 void Species::addInstruction(string inst)
 {
-    program[inst_count] = inst;
-    inst_count++;
+    program.push_back(inst);
 }
 
 string& Species::operator[] (int x)
