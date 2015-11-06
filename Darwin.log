@@ -1,0 +1,96 @@
+commit 806719d0255aa3e8efd7686ae14917a08bc79d63
+Author: Shubham Thakkar <sthakkar@cs.utexas.edu>
+Date:   Thu Nov 5 21:42:45 2015 -0600
+
+    made testDarwin.out
+
+commit 1848279e154b7cc206f0aa713ecad17240474c43
+Author: Ender Ceylan <endcey95@gmail.com>
+Date:   Thu Nov 5 21:30:16 2015 -0600
+
+    sdsdsdsd
+
+commit 7fc6cb7fecddb3ff4ef6fe456e08364793ecf5a5
+Author: Shubham Thakkar <sthakkar@cs.utexas.edu>
+Date:   Thu Nov 5 20:07:21 2015 -0600
+
+    added html and skeleton test. closes issue #13
+
+commit bedfec0a494edc0b0030b33d8bba4b7d379ddb1b
+Author: Ender Ceylan <endcey95@gmail.com>
+Date:   Thu Nov 5 19:46:05 2015 -0600
+
+    Created documentation
+
+commit 235ded19c582566280612832d3c8a330eb6c1dc6
+Merge: 1878247 e6e7379
+Author: Shubham Thakkar <sthakkar@cs.utexas.edu>
+Date:   Thu Nov 5 18:43:52 2015 -0600
+
+    Merge branch 'master' of https://github.com/enderceylan/cs371p-darwin
+
+commit 1878247a4b45f7f8a8a041c866b15cc8e432d75d
+Author: Shubham Thakkar <sthakkar@cs.utexas.edu>
+Date:   Thu Nov 5 18:43:26 2015 -0600
+
+    minor bugs
+
+commit e6e73799b57399ed15cbbe32565fb2597da10d3c
+Author: Ender Ceylan <endcey95@gmail.com>
+Date:   Thu Nov 5 18:40:32 2015 -0600
+
+    Added UML diagram. Closes #12
+
+commit a7612029f568b55b54775e4c8badc6c85ae138f3
+Author: Ender Ceylan <endcey95@gmail.com>
+Date:   Thu Nov 5 18:34:38 2015 -0600
+
+    Added travis.yml. Closes #11
+
+commit 867668dc5cdd32c8a23b84ab049c3e59d0710372
+Author: Shubham Thakkar <sthakkar@cs.utexas.edu>
+Date:   Thu Nov 5 18:32:46 2015 -0600
+
+    fixed all bugs
+
+commit 0aa31baf3762f8723e85a3ebae9225e843f30da1
+Author: Ender Ceylan <endcey95@gmail.com>
+Date:   Thu Nov 5 14:59:40 2015 -0600
+
+    Have first two tests running. Closes #8, closes #9, closes #10
+
+commit 1e1e6709409a02518dc118407cfa628c96caa147
+Author: Ender Ceylan <endcey95@gmail.com>
+Date:   Wed Nov 4 20:17:13 2015 -0600
+
+    Fixed segfault, closes #15
+
+commit 5ad44807fc40d24e2d5424c3a0ae21b2ef9486c3
+Author: Ender Ceylan <endcey95@gmail.com>
+Date:   Wed Nov 4 12:56:38 2015 -0600
+
+    Added code, closes #3, closes #4, closes #5, closes #6
+
+commit 7baa5d3fa1ec36b77a2aeff9dad968d7abac360a
+Author: Ender Ceylan <endcey95@gmail.com>
+Date:   Sun Nov 1 17:04:26 2015 -0600
+
+    Start Darwin.c++. Closes #2
+
+commit 13568bb7b3b35c36a2a2beb7e3418ce5645f576d
+Author: Ender Ceylan <endcey95@gmail.com>
+Date:   Sun Nov 1 13:21:25 2015 -0600
+
+    Closes #1
+
+commit 30b52736c448bcb4ec12058155d94c6a13ca672d
+Author: Ender Ceylan <endcey95@gmail.com>
+Date:   Sun Nov 1 13:19:20 2015 -0600
+
+    Added files
+
+commit ee743f3cffd54329d84b5673a563bd0fa551b427
+Author: Ender Ceylan <enderceylan@users.noreply.github.com>
+Date:   Sun Nov 1 12:57:07 2015 -0600
+
+    Create README.md
