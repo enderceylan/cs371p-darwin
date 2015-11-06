@@ -528,7 +528,7 @@ string& Species::operator[] (int x)
     Species::is_equal(const Species& other)
     Checks to see if two instances of Species are of equal types.
     Input: other is the other instance of Species to be compared.
-    Output: Returns true if they are of the same type, false otherwise.
+    Output: Returns true if they are of the same type, false
 */
 bool Species::is_equal(const Species& other) const{
     return symbol == other.symbol;
