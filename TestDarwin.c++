@@ -194,46 +194,6 @@ TEST(Darwin_methods, removeCreature_3) {
 }
 
 // ----
-// printBoard
-// ----
-
-TEST(Darwin_methods, printBoard_1) {
-	Darwin d = Darwin(3,3);
-	Species s = Species('z');
-	s.addInstruction("hop");
-	s.addInstruction("go 0");
-	Creature c = Creature(s,0);
-	d.addCreature(c,2,1);
-	d.executeTurn();
-	d.printBoard();
-	ASSERT_TRUE(true);
-}
-
-TEST(Darwin_methods, printBoard_2) {
-	Darwin d = Darwin(3,3);
-	Species s = Species('z');
-	s.addInstruction("hop");
-	s.addInstruction("go 0");
-	Creature c = Creature(s,0);
-	d.addCreature(c,2,2);
-	d.executeTurn();
-	d.printBoard();
-	ASSERT_TRUE(true);
-}
-
-TEST(Darwin_methods, printBoard_3) {
-	Darwin d = Darwin(3,3);
-	Species s = Species('z');
-	s.addInstruction("hop");
-	s.addInstruction("go 0");
-	Creature c = Creature(s,0);
-	d.addCreature(c,0,1);
-	d.executeTurn();
-	d.printBoard();
-	ASSERT_TRUE(true);
-}
-
-// ----
 // inBounds
 // ----
 

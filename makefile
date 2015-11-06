@@ -1,3 +1,4 @@
+
 FILES :=                              \
 	.gitignore						\
     .travis.yml                       \
@@ -10,9 +11,6 @@ FILES :=                              \
     TestDarwin.c++                   \
     TestDarwin.out					\
     html                              \
-    darwin-tests/ec28767-RunDarwin.out  \
-    darwin-tests/ec28767-TestDarwin.c++ \
-    darwin-tests/ec28767-TestDarwin.out \
     Darwin.log							
 
 CXX        := g++-4.8
