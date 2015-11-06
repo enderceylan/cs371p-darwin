@@ -1,18 +1,19 @@
 FILES :=                              \
+	.gitignore						\
     .travis.yml                       \
-    #darwin-tests/ec28767-RunDarwin.in   \
-    #darwin-tests/ec28767-RunDarwin.out  \
-    #darwin-tests/ec28767-TestDarwin.c++ \
-    #darwin-tests/ec28767-TestDarwin.out \
-    Darwin.c++                       \
+    makefile							\
     Darwin.h                         \
-    Darwin.log                       \
-    html                              \
+    Darwin.c++                       \
+    Darwin.pdf						\
     RunDarwin.c++                    \
-    RunDarwin.in                     \
-    RunDarwin.out                    \
+	RunDarwin.out                    \
     TestDarwin.c++                   \
-    TestDarwin.out
+    TestDarwin.out					\
+    html                              \
+    darwin-tests/ec28767-RunDarwin.out  \
+    darwin-tests/ec28767-TestDarwin.c++ \
+    darwin-tests/ec28767-TestDarwin.out \
+    Darwin.log							
 
 CXX        := g++-4.8
 CXXFLAGS   := -pedantic -std=c++11 -Wall
@@ -68,9 +69,7 @@ status:
 	git remote -v
 	git status
 
-#test: RunDarwin.tmp TestDarwin.tmp
-
-test: RunDarwin.tmp
+test: RunDarwin.tmp TestDarwin.tmp
 
 darwin-tests:
 	git clone https://github.com/cs371p-fall-2015/darwin-tests.git
