@@ -113,7 +113,6 @@ void Darwin::printBoard(void)
         }
         cout << endl;
     }
-    cout << endl;
 }
 
 bool Darwin::inBounds(int x, int y)
@@ -159,7 +158,6 @@ Creature::Creature(Species s, int dir)
 }
 
 bool Creature::acted_upon(int turn) {
-    //cout << "Turn_counter: " << turn_counter << ", turn = " << turn << endl;
     if (turn_counter <= turn) {
         return false;
     }
@@ -171,15 +169,13 @@ bool Creature::acted_upon(int turn) {
 bool Creature::isValid(int turn)
 {
     if ((direction != -1) && (program_counter != -1)){
-        //cout << "Turn_counter: " << turn_counter << ", turn = " << turn << endl;
-        //if (turn_counter <= turn){
-            return true;
-        //}
+        return true;
     }
     else {
         return false;
     }
 }
+
 
 std::pair<int, int> Creature::getNextLoc(int x, int y)
 {
@@ -210,28 +206,19 @@ std::pair<int, int> Creature::getNextLoc(int x, int y)
 void Creature::goAgain() {
     program_counter += 1;
     turn_counter -= 1;
-    //cout << species << endl;
-    //print_prg_ct();
-}
-
-void Creature::print_prg_ct() {
-    cout << species << endl;
-    cout << direction << endl;
-    cout << program_counter << endl;
-    cout << turn_counter << endl;
 }
 
 void Creature::modify_creature(const Creature& c) {
+    if (!species.is_equal(c.species)) {
         species = c.species;
         program_counter = 0;
+    }
 }
 
 void Creature::executeInstruction(Darwin* d, int x, int y)
 {
     turn_counter += 1;
-    //cout << program_counter << endl;
     string inst = species[program_counter];
-    //cout << inst << endl;
     if (inst.find("hop") != string::npos) 
     {
         std::pair<int, int> newloc = getNextLoc(x,y);
@@ -239,29 +226,14 @@ void Creature::executeInstruction(Darwin* d, int x, int y)
         {
             d->addCreature(Creature(*this), newloc.first, newloc.second);
             d->removeCreature(x,y);
-            //*this.print_prg_ct();
-
             (*d).repeat(newloc.first, newloc.second);
-            //d->at(newloc.first,newloc.second).goAgain();
-        
-            //d->at(newloc.first,newloc.second).print_prg_ct();
             d->at(newloc.first,newloc.second).executeInstruction(d,newloc.first, newloc.second);
         }
         else
         {
             d->at(x,y).goAgain();
-            //d->at(x,y).executeInstruction(d,x,y);
+            d->at(x,y).executeInstruction(d,x,y);
         }
-
-        //cout << "Program Counter: " << program_counter << endl;
-        //cout << species << endl;
-        //d->at(newloc.first,newloc.second).program_counter += 1;
-        //d->at(newloc.first,newloc.second).turn_counter -= 1;
-        
-        // program_counter += 1;
-
-        // turn_counter -= 1;
-        //executeInstruction(d,x,y);
     } 
     else if (inst.find("left") != string::npos) 
     {
@@ -312,7 +284,7 @@ void Creature::executeInstruction(Darwin* d, int x, int y)
     {
         std::pair<int, int> newloc = getNextLoc(x,y);
         string num = inst.substr(9);
-        if (!d->at(newloc.first,newloc.second).isValid(0))
+        if (d->inBounds(newloc.first, newloc.second) && !d->at(newloc.first,newloc.second).isValid(0))
         {
             program_counter = (int)stoi(num);
             turn_counter -= 1;
@@ -324,7 +296,6 @@ void Creature::executeInstruction(Darwin* d, int x, int y)
             turn_counter -= 1;
             executeInstruction(d,x,y);
         }
-
     }
     else if (inst.find("if_wall") != string::npos) 
     {
@@ -365,9 +336,8 @@ void Creature::executeInstruction(Darwin* d, int x, int y)
     {
         std::pair<int, int> newloc = getNextLoc(x,y);
         string num = inst.substr(9);
-        if (d->inBounds(newloc.first,newloc.second) && d->at(newloc.first,newloc.second).isValid(0))
+        if (d->inBounds(newloc.first,newloc.second) && d->at(newloc.first,newloc.second).isValid(0) && !(species.is_equal(d->at(newloc.first, newloc.second).species)))
         {
-            //assert(false);
             program_counter = (int)stoi(num);
             turn_counter -= 1;
             executeInstruction(d,x,y);
@@ -416,4 +386,8 @@ void Species::addInstruction(string inst)
 string& Species::operator[] (int x)
 {
     return program[x];
+}
+
+bool Species::is_equal(const Species& other) const{
+    return symbol == other.symbol;
 }

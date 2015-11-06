@@ -134,6 +134,7 @@ int main () {
     // ----------
 
     cout << "*** Darwin 8x8 ***" << endl;
+    srand(0);
     /*
     8x8 Darwin
     Food,   facing east,  at (0, 0)
@@ -166,6 +167,7 @@ int main () {
     {
         map1.printBoard();
         map1.executeTurn();
+        cout << endl;
     }
 
     // ----------
@@ -198,6 +200,7 @@ int main () {
     {
         map2.printBoard();
         map2.executeTurn();
+        cout << endl;
     }
 
     // ------------
@@ -228,31 +231,32 @@ int main () {
     {
         int position = rand()%5184;
         int direction = rand()%4;
-        map3.addCreature(Creature(food, direction), position/72, (position/72)/72);
+        map3.addCreature(Creature(food, direction), position/72, position-72*(position/72));
     }
     for (int i = 0; i < 10; i++)
     {
         int position = rand()%5184;
         int direction = rand()%4;
-        map3.addCreature(Creature(hopper, direction), position/72, (position/72)/72);
+        map3.addCreature(Creature(hopper, direction), position/72, position-72*(position/72));
     }
     for (int i = 0; i < 10; i++)
     {
         int position = rand()%5184;
         int direction = rand()%4;
-        map3.addCreature(Creature(rover, direction), position/72, (position/72)/72);
+        map3.addCreature(Creature(rover, direction), position/72, position-72*(position/72));
     }
     for (int i = 0; i < 10; i++)
     {
         int position = rand()%5184;
         int direction = rand()%4;
-        map3.addCreature(Creature(trap, direction), position/72, (position/72)/72);
+        map3.addCreature(Creature(trap, direction), position/72, position-72*(position/72));
     }
     for (int i = 0; i <= 1000; i++)
     {
-        if (i < 10 || i % 100 == 0)
+        if (i <= 10 || i % 100 == 0)
         {
             map3.printBoard();
+            cout << endl;
         }
         map3.executeTurn();
     }
@@ -287,39 +291,41 @@ int main () {
     {
         int position = rand()%5184;
         int direction = rand()%4;
-        map4.addCreature(Creature(food, direction), position/72, (position/72)/72);
+        map4.addCreature(Creature(food, direction), position/72, position-72*(position/72));
     }
     for (int i = 0; i < 10; i++)
     {
         int position = rand()%5184;
         int direction = rand()%4;
-        map4.addCreature(Creature(hopper, direction), position/72, (position/72)/72);
+        map4.addCreature(Creature(hopper, direction), position/72, position-72*(position/72));
     }
     for (int i = 0; i < 10; i++)
     {
         int position = rand()%5184;
         int direction = rand()%4;
-        map4.addCreature(Creature(rover, direction), position/72, (position/72)/72);
+        map4.addCreature(Creature(rover, direction), position/72, position-72*(position/72));
     }
     for (int i = 0; i < 10; i++)
     {
         int position = rand()%5184;
         int direction = rand()%4;
-        map4.addCreature(Creature(trap, direction), position/72, (position/72)/72);
+        map4.addCreature(Creature(trap, direction), position/72, position-72*(position/72));
     }
     for (int i = 0; i < 10; i++)
     {
         int position = rand()%5184;
         int direction = rand()%4;
-        map4.addCreature(Creature(best, direction), position/72, (position/72)/72);
+        map4.addCreature(Creature(best, direction), position/72, position-72*(position/72));
     }
     for (int i = 0; i <= 1000; i++)
     {
-        if (i < 10 || i % 100 == 0)
+        if (i <= 10 || i % 100 == 0)
         {
             map4.printBoard();
+            if (i != 1000)
+                cout << endl;
         }
-        map4.executeTurn();
+       map4.executeTurn();
     }
 
     return 0;}

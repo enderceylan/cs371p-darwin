@@ -22,6 +22,7 @@ class Species
         Species(const Species& s);
         void addInstruction(string inst);
         string& operator[] (int x);
+        bool is_equal(const Species&) const;
         friend std::ostream& operator<<(std::ostream& out, const Species& s)
         {
             return out << s.symbol;
@@ -41,7 +42,6 @@ class Creature
         void executeInstruction(Darwin* d, int x, int y);
         bool acted_upon(int turn);
         void goAgain();
-        void print_prg_ct();
         void modify_creature(const Creature& c);
         friend std::ostream& operator<<(std::ostream& out, const Creature& c)
         {
