@@ -38,7 +38,7 @@ class Creature
         Creature();
         Creature(Species s, int dir);
         Creature(const Creature& c);
-        bool isValid(int turn);
+        bool isValid();
         void executeInstruction(Darwin* d, int x, int y);
         bool acted_upon(int turn);
         void goAgain();
