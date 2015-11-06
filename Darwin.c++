@@ -77,15 +77,7 @@ void Darwin::executeTurn(void)
 
 Creature& Darwin::at(int x, int y)
 {
-    if (x >= x_size || y >= y_size)
-    {
-        Creature c = Creature();
-        return c;
-    }
-    else
-    {
-        return grid[x][y];
-    }
+    return grid[x][y];
 }
 
 void Darwin::printBoard(void)
@@ -316,7 +308,6 @@ void Creature::executeInstruction(Darwin* d, int x, int y)
     }
     else if (inst.find("if_random") != string::npos) 
     {
-        std::pair<int, int> newloc = getNextLoc(x,y);
         int rand_num = rand();
         string num = inst.substr(10);
         if (rand_num % 2 == 1)
@@ -351,7 +342,6 @@ void Creature::executeInstruction(Darwin* d, int x, int y)
     }
     else if (inst.find("go") != string::npos) 
     {
-        std::pair<int, int> newloc = getNextLoc(x,y);
         string num = inst.substr(3);
         program_counter = (int)stoi(num);
     }
